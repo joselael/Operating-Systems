@@ -35,12 +35,20 @@
 *.i*86
 *.x86_64
 *.hex
+*.x
+
+# Temp files
+*~
+*#*#*
 
 # Debug files
 *.dSYM/
 *.su
 *.idb
 *.pdb
+
+# Hidden files
+*.
 
 # Kernel Module Compile Results
 *.mod*
