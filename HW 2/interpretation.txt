@@ -1,0 +1,29 @@
+Interpretation of part2.c:
+
+The first line of my output: a: 10 b: 30, process_id: 9782 is the result of the last printf()
+in the program, the only output of the parent process. Since the variables a and b retained their
+values since the beginning of the program (all other operations happenning beforehand were
+happening on child processes - which have their own copies of these variables, so the parents'
+variables were unaffected). a equaled 10, and b 25, so 10 + 25 - 5 = 30, which is what was
+outputed. Furthermore, we know this is from the parent process, since it has the smallest pid.
+
+The second output, a: 35 b: 25 process_id: 9783 is from the first printf() of the program.
+Here,  the value of b (25) is simply added to the value of a (10), yielding 35. We can tell that
+this is from the second process, since the pid is one more than the parent pid, indicating that it was started right after the parent process (this won't necessarily be always true.)
+
+The third output, a: 35 b: 45, process_id: 9783: is from the second printf(). From the previous
+step we saw that the value of a was incremented to 35; since we are still in the process, we are
+dealing with the same variables, thus the values are the same. Now we are simply adding 20 to b
+(which used to be 25), which is now valued at 45.
+
+Finally, the last output: a: 905 b: 25, process_id: 9786, is from the third printf() statement,
+it is originating from the second child process, and has it has variables with values that were
+present after the first operation of the first child process. However, it did not get altered by
+'b += 20' because this processed was already forked before that operation occured; and since it
+has its own copy of the variables, it was unaffected by it. So a and b has the value from the
+second output (a = 35, and b = 25), and we are just assigned to a the result of 35 * 25  - 5,
+which is 905.
+
+This exercise demonstrates the fact that each process is running in its own memory space after
+being forked, and activities on other processes do not affect it after the fact.
+
